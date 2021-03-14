@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'org.jetbrains.dokka'
 }
 
 android {
@@ -29,6 +30,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -44,4 +49,42 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
+}
+
+dokka {
+    outputFormat = "html"
+
+    configuration {
+        // 非推奨のメンバを表示しない
+        skipDeprecated = true
+
+        // ドキュメント化されなかったメンバを通知する
+        reportUndocumented = true
+
+        // 空のパッケージをスキップする
+        skipEmptyPackages = true
+
+        /*
+        アクセス修飾子がpublic以外のメンバを表示しない
+        ※ internalまで含めるというような設定はできない
+         */
+        includeNonPublic = false
+
+        // モジュール・パッケージに対する説明をするファイルを指定する
+        includes = ['packages.md']
+
+        /*
+        Android Developerへのリンクを張らない
+        ※ リンク先のURLが間違っていることがあるので
+         */
+        noAndroidSdkLink = true
+
+        // パッケージごとの説明
+        perPackageOption {
+            prefix = "com.example.kdocdokkasample.other"
+            // 該当パッケージをドキュメント化しない
+            suppress = true
+        }
+
+    }
 }

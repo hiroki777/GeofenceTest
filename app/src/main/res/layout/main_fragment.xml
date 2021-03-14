@@ -1,20 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.main.MainFragment">
+    android:id="@+id/main">
 
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MainFragment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.geofencetest.main.MainViewModel" />
+    </data>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".main.MainFragment">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/horizontal_guideline_upper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical_guideline_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+
+        <Button
+            android:id="@+id/register_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewmodel.clickRegisterHomeButton()}"
+            android:text="@string/register_home"
+            app:layout_constraintLeft_toLeftOf="@id/vertical_guideline_left"
+            app:layout_constraintRight_toRightOf="@id/vertical_guideline_right"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_guideline_bottom"
+            app:layout_constraintTop_toTopOf="@id/horizontal_guideline_upper" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical_guideline_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/horizontal_guideline_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.9" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
